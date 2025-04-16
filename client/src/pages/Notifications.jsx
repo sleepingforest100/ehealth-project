@@ -28,47 +28,48 @@ const Notifications = () => {
   }, []);
 
   return (
-    <>
+    <div className="page-wrapper">
       <Navbar />
       {loading ? (
         <Loading />
       ) : (
-        <section className="container notif-section">
-          <h2 className="page-heading">Your Notifications</h2>
-
-          {notifications.length > 0 ? (
-            <div className="notifications">
-              <table>
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>Content</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {notifications?.map((ele, i) => {
-                    return (
+        <main className="main-content">
+          <section className="container notif-section">
+            <h2 className="page-heading">Your Notifications</h2>
+  
+            {notifications.length > 0 ? (
+              <div className="notifications">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Content</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {notifications?.map((ele, i) => (
                       <tr key={ele?._id}>
                         <td>{i + 1}</td>
                         <td>{ele?.content}</td>
                         <td>{ele?.updatedAt.split("T")[0]}</td>
                         <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <Empty />
-          )}
-        </section>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <Empty />
+            )}
+          </section>
+        </main>
       )}
       <Footer />
-    </>
+    </div>
   );
+  
 };
 
 export default Notifications;
