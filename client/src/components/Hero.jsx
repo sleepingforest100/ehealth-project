@@ -11,9 +11,7 @@ const Hero = () => {
           Our Responsibility
         </h1>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-          tenetur doloremque molestias repellat minus asperiores in aperiam
-          dolor, quaerat praesentium.
+          some text
         </p>
       </div>
       <div className="hero-img">
