@@ -9,6 +9,7 @@ import Loading from "./components/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const AIDoctor = lazy(() => import("./pages/AIDoctor"));
 const Appointments = lazy(() => import("./pages/Appointments"));
 const Doctors = lazy(() => import("./pages/Doctors"));
 const Profile = lazy(() => import("./pages/Profile"));
@@ -41,6 +42,10 @@ function App() {
           <Route
             path="/doctors"
             element={<Doctors />}
+          />
+          <Route
+            path="/aidoctor"
+            element={<AIDoctor />}
           />
           <Route
             path="/appointments"

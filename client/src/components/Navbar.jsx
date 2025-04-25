@@ -45,6 +45,9 @@ const Navbar = () => {
           )}
           {token && !user.isAdmin && (
             <>
+            <li>
+                <NavLink to={"/aidoctor"}>AI Doctor</NavLink>
+              </li>
               <li>
                 <NavLink to={"/appointments"}>Appointments</NavLink>
               </li>

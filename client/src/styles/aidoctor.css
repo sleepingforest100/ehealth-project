@@ -1,0 +1,96 @@
+/* Бело-синие стили для медицинского чат-бота */
+.chat-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f7f8fa; /* Легкий серый фон */
+    min-height: 100vh;
+  }
+  
+  .chat-container {
+    background-color: #ffffff; /* Белый фон */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    width: 100%;
+    max-width: 900px; /* Ограничение по ширине */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px; /* Минимальная высота для контейнера */
+  }
+  
+  .chat-heading {
+    font-size: 2rem;
+    color: #007bff; /* Синий цвет */
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .chat-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1; /* Позволяет форме занимать все доступное пространство */
+  }
+  
+  .chat-input {
+    width: 100%;
+    max-width: 700px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f1f3f8;
+    transition: border-color 0.3s ease;
+    resize: vertical;
+  }
+  
+  .chat-input:focus {
+    outline: none;
+    border-color: #007bff; /* Синий фокус */
+  }
+  
+  .form-btn {
+    background-color: #007bff; /* Синий цвет */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-btn:hover {
+    background-color: #0056b3; /* Темно-синий при наведении */
+  }
+  
+  .form-btn:disabled {
+    background-color: #a3a3a3;
+  }
+  
+  .response-block {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f1f3f8;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0; /* Не позволяйте блоку с ответом сжиматься */
+  }
+  
+  .response-block h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .response-block p {
+    color: #333;
+    font-size: 1rem;
+  }
+  
