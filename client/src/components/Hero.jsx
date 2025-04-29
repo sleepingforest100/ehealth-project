@@ -7,11 +7,12 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-content">
         <h1>
-          Your Health, <br />
-          Our Responsibility
+        Bridging Healthcare <br />
+        Across Kazakhstan
         </h1>
         <p>
-          some text
+        Kazakhstan E-Health is a digital healthcare platform designed to connect people in remote and rural regions of Kazakhstan with qualified medical professionals.
+We make access to healthcare easier, faster, and more inclusive — wherever you are.
         </p>
       </div>
       <div className="hero-img">

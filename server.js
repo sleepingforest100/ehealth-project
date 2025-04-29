@@ -1,4 +1,4 @@
-const axios = require("axios"); // ← добавь вверху
+const axios = require("axios"); 
 
 
 const express = require("express");
@@ -20,16 +20,11 @@ app.use("/api/user", userRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/appointment", appointRouter);
 app.use("/api/notification", notificationRouter);
-app.use(express.static(path.join(__dirname, "./client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
 
 // 🌐 AI Doctor Chat API (добавлен сюда)
 const RAPIDAPI_HOST = 'ai-doctor-api-ai-medical-chatbot-healthcare-ai-assistant.p.rapidapi.com';
 
-app.post('/aidoctor', async (req, res) => {
+app.post('/api/aidoctor', async (req, res) => {
   const { message, specialization = 'general', language = 'en' } = req.body;
   if (!message) return res.status(400).json({ error: 'Field "message" is required' });
 
@@ -41,7 +36,7 @@ app.post('/aidoctor', async (req, res) => {
         headers: {
           'Content-Type': 'application/json',
           'x-rapidapi-host': RAPIDAPI_HOST,
-          'x-rapidapi-key': 'a1ae4500d6msh126b4a071d9decfp17835fjsn8b9977caf602',
+          'x-rapidapi-key': 'f3867b46cbmshd2a54e70a78921fp18f715jsn76d7028c624d',
         }
       }
     );
@@ -51,6 +46,13 @@ app.post('/aidoctor', async (req, res) => {
     return res.status(502).json({ error: 'Ошибка при обращении к медицинскому API' });
   }
 });
+
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 
 app.listen(port, () => {});
 
