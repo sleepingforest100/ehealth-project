@@ -8,6 +8,20 @@ import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/reducers/rootSlice";
 import Empty from "../components/Empty";
+import { useLanguage } from "../LanguageContext";
+
+const translations = {
+  en: {
+    heading: "Our Doctors",
+  },
+  ru: {
+    heading: "Наши врачи",
+  },
+  kz: {
+    heading: "Біздің дәрігерлер",
+  },
+};
+
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -25,13 +39,18 @@ const Doctors = () => {
     fetchAllDocs();
   }, []);
 
+  const { lang } = useLanguage();
+const t = translations[lang];
+
+
   return (
     <>
       <Navbar />
       {loading && <Loading />}
       {!loading && (
         <section className="container doctors">
-          <h2 className="page-heading">Our Doctors</h2>
+          <h2 className="page-heading">{t.heading}</h2>
+
           {doctors.length > 0 ? (
             <div className="doctors-card-container">
               {doctors.map((ele) => {

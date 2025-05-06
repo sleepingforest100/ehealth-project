@@ -3,37 +3,75 @@ import "../styles/footer.css";
 import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
 import { HashLink } from "react-router-hash-link";
 import { NavLink } from "react-router-dom";
+import { useLanguage } from "../LanguageContext"; // подключение
+
+const translations = {
+  en: {
+    linksTitle: "Links",
+    home: "Home",
+    doctors: "Doctors",
+    appointments: "Appointments",
+    notifications: "Notifications",
+    contact: "Contact Us",
+    profile: "Profile",
+    socialTitle: "Social links",
+  },
+  ru: {
+    linksTitle: "Ссылки",
+    home: "Главная",
+    doctors: "Врачи",
+    appointments: "Записи",
+    notifications: "Уведомления",
+    contact: "Связаться с нами",
+    profile: "Профиль",
+    socialTitle: "Социальные сети",
+  },
+  kz: {
+    linksTitle: "Сілтемелер",
+    home: "Басты бет",
+    doctors: "Дәрігерлер",
+    appointments: "Жазбалар",
+    notifications: "Хабарламалар",
+    contact: "Байланысу",
+    profile: "Профиль",
+    socialTitle: "Әлеуметтік желілер",
+  },
+};
+
 
 const Footer = () => {
+  const { lang } = useLanguage(); // получаем текущий язык
+  const t = translations[lang];
+
   return (
     <>
       <footer>
         <div className="footer">
           <div className="footer-links">
-            <h3>Links</h3>
+            <h3>{t.linksTitle}</h3>
             <ul>
               <li>
-                <NavLink to={"/"}>Home</NavLink>
+                <NavLink to={"/"}>{t.home}</NavLink>
               </li>
               <li>
-                <NavLink to={"/doctors"}>Doctors</NavLink>
+                <NavLink to={"/doctors"}>{t.doctors}</NavLink>
               </li>
               <li>
-                <NavLink to={"/appointments"}>Appointments</NavLink>
+                <NavLink to={"/appointments"}>{t.appointments}</NavLink>
               </li>
               <li>
-                <NavLink to={"/notifications"}>Notifications</NavLink>
+                <NavLink to={"/notifications"}>{t.notifications}</NavLink>
               </li>
               <li>
-                <HashLink to={"/#contact"}>Contact Us</HashLink>
+                <HashLink to={"/#contact"}>{t.contact}</HashLink>
               </li>
               <li>
-                <NavLink to={"/profile"}>Profile</NavLink>
+                <NavLink to={"/profile"}>{t.profile}</NavLink>
               </li>
             </ul>
           </div>
           <div className="social">
-            <h3>Social links</h3>
+            <h3>{t.socialTitle}</h3>
             <ul>
               <li className="facebook">
                 <a
@@ -66,19 +104,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-         {" "}
-          <a
-            href=""
-            target="_blank"
-            rel="noreferrer"
-          >
-            
-          </a>{" "}
           © {new Date().getFullYear()}
         </div>
       </footer>
     </>
   );
 };
+
 
 export default Footer;
