@@ -5,8 +5,11 @@ import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import HomeCircles from "../components/HomeCircles";
+import { useLanguage } from "../LanguageContext"; // <--- добавь
+
 
 const Home = () => {
+  const { lang } = useLanguage();
   return (
     <>
       <Navbar />
