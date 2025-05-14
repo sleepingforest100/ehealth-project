@@ -7,10 +7,64 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/reducers/rootSlice";
 import jwt_decode from "jwt-decode";
 import fetchData from "../helper/apiCall";
+import { useLanguage } from "../LanguageContext";
+
+
+const translations = {
+  en: {
+    signIn: "Sign In",
+    emailPlaceholder: "Enter your email",
+    passwordPlaceholder: "Enter your password",
+    signInButton: "Sign In",
+    notAUser: "Not a user?",
+    register: "Register",
+    errors: {
+      emptyFields: "Input field should not be empty",
+      shortPassword: "Password must be at least 5 characters long",
+      loginSuccess: "Login successfully",
+      loginPending: "Logging in...",
+      loginError: "Unable to login user",
+    }
+  },
+  ru: {
+    signIn: "Войти",
+    emailPlaceholder: "Введите вашу почту",
+    passwordPlaceholder: "Введите ваш пароль",
+    signInButton: "Войти",
+    notAUser: "Еще нет аккаунта?",
+    register: "Зарегистрироваться",
+    errors: {
+      emptyFields: "Поля не должны быть пустыми",
+      shortPassword: "Пароль должен содержать не менее 5 символов",
+      loginSuccess: "Успешный вход",
+      loginPending: "Вход в систему...",
+      loginError: "Не удалось войти",
+    }
+  },
+  kz: {
+    signIn: "Кіру",
+    emailPlaceholder: "Электрон поштаңызды енгізіңіз",
+    passwordPlaceholder: "Құпия сөзіңізді енгізіңіз",
+    signInButton: "Кіру",
+    notAUser: "Тіркелмегенсіз бе?",
+    register: "Тіркелу",
+    errors: {
+      emptyFields: "Барлық мәліметтерді енгізу қажет",
+      shortPassword: "Құпиясөз кемінде 5 таңбадан тұруы керек",
+      loginSuccess: "Сәтті кірдіңіз",
+      loginPending: "Кіру жүріп жатыр...",
+      loginError: "Кіру сәтсіз аяқталды",
+    }
+  },
+};
+
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 function Login() {
+  const { lang } = useLanguage();
+  const t = translations[lang];
+
   const dispatch = useDispatch();
   const [formDetails, setFormDetails] = useState({
     email: "",
@@ -31,9 +85,9 @@ function Login() {
       e.preventDefault();
       const { email, password } = formDetails;
       if (!email || !password) {
-        return toast.error("Input field should not be empty");
+        return toast.error(t.errors.emptyFields);
       } else if (password.length < 5) {
-        return toast.error("Password must be at least 5 characters long");
+        return toast.error(t.errors.shortPassword);
       }
 
       const { data } = await toast.promise(
@@ -42,10 +96,10 @@ function Login() {
           password,
         }),
         {
-          pending: "Logging in...",
-          success: "Login successfully",
-          error: "Unable to login user",
-          loading: "Logging user...",
+          pending: t.errors.loginPending,
+          success: t.errors.loginSuccess,
+          error: t.errors.loginError,
+          loading: t.errors.loginPending,
         }
       );
       localStorage.setItem("token", data.token);
@@ -69,43 +123,37 @@ function Login() {
   return (
     <section className="register-section flex-center">
       <div className="register-container flex-center">
-        <h2 className="form-heading">Sign In</h2>
+      <h2 className="form-heading">{t.signIn}</h2>
         <form
           onSubmit={formSubmit}
           className="register-form"
         >
           <input
-            type="email"
-            name="email"
-            className="form-input"
-            placeholder="Enter your email"
-            value={formDetails.email}
-            onChange={inputChange}
-          />
-          <input
-            type="password"
-            name="password"
-            className="form-input"
-            placeholder="Enter your password"
-            value={formDetails.password}
-            onChange={inputChange}
-          />
-          <button
-            type="submit"
-            className="btn form-btn"
-          >
-            sign in
-          </button>
+  type="email"
+  name="email"
+  className="form-input"
+  placeholder={t.emailPlaceholder}
+  value={formDetails.email}
+  onChange={inputChange}
+/>
+<input
+  type="password"
+  name="password"
+  className="form-input"
+  placeholder={t.passwordPlaceholder}
+  value={formDetails.password}
+  onChange={inputChange}
+/>
+<button type="submit" className="btn form-btn">
+  {t.signInButton}
+</button>
         </form>
         <p>
-          Not a user?{" "}
-          <NavLink
-            className="login-link"
-            to={"/register"}
-          >
-            Register
-          </NavLink>
-        </p>
+  {t.notAUser}{" "}
+  <NavLink className="login-link" to={"/register"}>
+    {t.register}
+  </NavLink>
+</p>
       </div>
     </section>
   );
