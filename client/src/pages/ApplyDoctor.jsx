@@ -5,11 +5,48 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useLanguage } from "../LanguageContext";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
+const translations = {
+  en: {
+    heading: "Apply for Doctor",
+    specialization: "Enter your specialization",
+    experience: "Enter your experience (in years)",
+    fees: "Enter your fees (in tenge)",
+    button: "Apply",
+    success: "Doctor application sent successfully",
+    error: "Unable to send Doctor application",
+    loading: "Sending doctor application...",
+  },
+  ru: {
+    heading: "Подать заявку на врача",
+    specialization: "Введите вашу специализацию",
+    experience: "Введите ваш опыт (в годах)",
+    fees: "Введите стоимость консультации (в тенге)",
+    button: "Подать заявку",
+    success: "Заявка врача успешно отправлена",
+    error: "Не удалось отправить заявку врача",
+    loading: "Отправка заявки врача...",
+  },
+  kz: {
+    heading: "Дәрігер болуға өтініш беру",
+    specialization: "Мамандығыңызды енгізіңіз",
+    experience: "Тәжірибеңізді енгізіңіз (жылмен)",
+    fees: "Қызмет ақыңызды енгізіңіз (тенгемен)",
+    button: "Өтініш беру",
+    success: "Дәрігер өтініші сәтті жіберілді",
+    error: "Дәрігер өтінішін жіберу сәтсіз аяқталды",
+    loading: "Дәрігер өтінішін жіберілуде...",
+  },
+};
+
 const ApplyDoctor = () => {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
+  const t = translations[lang];
+
   const [formDetails, setFormDetails] = useState({
     specialization: "",
     experience: "",
@@ -18,10 +55,7 @@ const ApplyDoctor = () => {
 
   const inputChange = (e) => {
     const { name, value } = e.target;
-    return setFormDetails({
-      ...formDetails,
-      [name]: value,
-    });
+    setFormDetails({ ...formDetails, [name]: value });
   };
 
   const btnClick = async (e) => {
@@ -30,9 +64,7 @@ const ApplyDoctor = () => {
       await toast.promise(
         axios.post(
           "/doctor/applyfordoctor",
-          {
-            formDetails,
-          },
+          { formDetails },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,9 +72,9 @@ const ApplyDoctor = () => {
           }
         ),
         {
-          success: "Doctor application sent successfully",
-          error: "Unable to send Doctor application",
-          loading: "Sending doctor application...",
+          success: t.success,
+          error: t.error,
+          loading: t.loading,
         }
       );
 
@@ -55,18 +87,15 @@ const ApplyDoctor = () => {
   return (
     <>
       <Navbar />
-      <section
-        className="register-section flex-center apply-doctor"
-        id="contact"
-      >
+      <section className="register-section flex-center apply-doctor" id="contact">
         <div className="register-container flex-center contact">
-          <h2 className="form-heading">Apply for Doctor</h2>
-          <form className="register-form ">
+          <h2 className="form-heading">{t.heading}</h2>
+          <form className="register-form">
             <input
               type="text"
               name="specialization"
               className="form-input"
-              placeholder="Enter your specialization"
+              placeholder={t.specialization}
               value={formDetails.specialization}
               onChange={inputChange}
             />
@@ -74,7 +103,7 @@ const ApplyDoctor = () => {
               type="number"
               name="experience"
               className="form-input"
-              placeholder="Enter your experience (in years)"
+              placeholder={t.experience}
               value={formDetails.experience}
               onChange={inputChange}
             />
@@ -82,16 +111,12 @@ const ApplyDoctor = () => {
               type="number"
               name="fees"
               className="form-input"
-              placeholder="Enter your fees  (in dollars)"
+              placeholder={t.fees}
               value={formDetails.fees}
               onChange={inputChange}
             />
-            <button
-              type="submit"
-              className="btn form-btn"
-              onClick={btnClick}
-            >
-              apply
+            <button type="submit" className="btn form-btn" onClick={btnClick}>
+              {t.button}
             </button>
           </form>
         </div>
