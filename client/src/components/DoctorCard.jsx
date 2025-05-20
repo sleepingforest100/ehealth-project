@@ -34,10 +34,10 @@ const DoctorCard = ({ ele }) => {
       </p>
       <p className="experience">
         <strong>Experience: </strong>
-        {ele?.experience}yrs
+        {ele?.experience} years
       </p>
       <p className="fees">
-        <strong>Fees per consultation: </strong>$ {ele?.fees}
+        <strong>Fees per consultation: </strong> {ele?.fees} ₸
       </p>
       <p className="phone">
         <strong>Phone: </strong>
